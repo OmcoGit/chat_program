@@ -24,7 +24,9 @@ def pushToAll(message: str, sender_socket: socket.socket) -> None:
                 client_socket.close()
 
 def manage_client(client_socket: socket.socket, client_address: Tuple[str, int]) -> None:
-    """Handle communication with a single client."""
+    """Handles the initial setup for a new client connection by prompting for a username,
+    storing the username in a client dictionary, and notifying all other clients that
+    a new user has joined the chat."""
     client_socket.send("Enter your username: ".encode('utf-8'))
     username: str = client_socket.recv(BUFFER_SIZE).decode('utf-8').strip()
     clients[client_socket] = username
